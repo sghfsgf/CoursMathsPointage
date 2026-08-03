@@ -195,15 +195,24 @@
 
     document.getElementById('datePointage').valueAsDate = new Date();
 
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      event.target.classList.add('active');
-      if (id === 'eleves') afficherEleves();
-      if (id === 'pointage') chargerElevesPointage();
-      if (id === 'historique') afficherHistorique();
-    }
+   function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  
+  document.getElementById(id).classList.add('active');
+  
+  // Active le bon onglet
+  const tabs = document.querySelectorAll('.tab');
+  if (id === 'eleves') tabs[0].classList.add('active');
+  if (id === 'pointage') tabs[1].classList.add('active');
+  if (id === 'historique') tabs[2].classList.add('active');
+  if (id === 'stats') tabs[3].classList.add('active');
+
+  if (id === 'eleves') afficherEleves();
+  if (id === 'pointage') chargerElevesPointage();
+  if (id === 'historique') afficherHistorique();
+  if (id === 'stats') afficherStats();
+}
 
     function sauvegarder() {
       localStorage.setItem('eleves', JSON.stringify(eleves));
