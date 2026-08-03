@@ -265,6 +265,7 @@
           </select>
           <button class="secondary" onclick="exportJSON()">Exporter données</button>
           <button class="outline" onclick="document.getElementById('importFile').click()">Importer</button>
+          <button class="danger" onclick="supprimerHistorique()">🗑️ Supprimer historique</button>
           <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
         </div>
         <div id="contenuHistorique"></div>
@@ -483,6 +484,25 @@
         `;
       }).join('');
     }
+    function supprimerHistorique() {
+
+  if (pointages.length === 0) {
+    alert("Aucun historique à supprimer");
+    return;
+  }
+
+  if (confirm("Voulez-vous supprimer tout l'historique des pointages ?")) {
+
+    pointages = [];
+
+    localStorage.removeItem('pointages');
+
+    alert("Historique supprimé avec succès !");
+
+    afficherHistorique();
+    afficherStats();
+  }
+}
 
     function formatDate(d) {
       const [y, m, day] = d.split('-');
