@@ -142,6 +142,7 @@
       .card { box-shadow: none; border: 1px solid #ccc; }
     }
   </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -264,8 +265,12 @@
             <option value="Terminale">Secondaire - Terminale</option>
           </select>
           <button class="secondary" onclick="exportJSON()">Exporter données</button>
-          <button class="outline" onclick="document.getElementById('importFile').click()">Importer</button>
-          <button class="danger" onclick="supprimerHistorique()">🗑️ Supprimer historique</button>
+
+<button class="success" onclick="exportExcel()">📊 Export Excel</button>
+          
+<button class="outline" onclick="document.getElementById('importFile').click()">Importer</button>
+          
+<button class="danger" onclick="supprimerHistorique()">🗑️ Supprimer historique</button>
           <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
         </div>
         <div id="contenuHistorique"></div>
@@ -551,6 +556,36 @@
     }
 
     // ===== IMPORT / EXPORT =====
+    function exportExcel() {
+
+  if (pointages.length === 0) {
+    alert("Aucun pointage à exporter");
+    return;
+  }
+
+  const donnees = pointages.map(p => ({
+    Date: p.date,
+    Seance: p.seance,
+    Eleve: p.nom,
+    Niveau: p.niveau,
+    Statut: p.statut
+  }));
+
+  const feuille = XLSX.utils.json_to_sheet(donnees);
+
+  const classeur = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(
+    classeur,
+    feuille,
+    "Pointages"
+  );
+
+  XLSX.writeFile(
+    classeur,
+    "Pointage_Cours_Maths.xlsx"
+  );
+}
     function exportJSON() {
       const data = { eleves, pointages };
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
