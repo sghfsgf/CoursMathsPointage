@@ -494,8 +494,28 @@ window.modifierEleve = async function(id) {
 </td>
           <td>${e.parent || "—"}</td>
          <td>
-  <button onclick="modifierEleve('${e.id}')">✏️ Modifier</button>
-  <button class="danger" onclick="supprimerEleve('${e.id}')">🗑️ Supprimer</button>
+  <button 
+    onclick="modifierEleve('${e.id}')"
+    title="Modifier le contact"
+    style="
+      padding:6px 8px;
+      font-size:14px;
+      border-radius:6px;
+    ">
+    ✏️
+  </button>
+
+  <button 
+    class="danger"
+    onclick="supprimerEleve('${e.id}')"
+    title="Supprimer l'élève"
+    style="
+      padding:6px 8px;
+      font-size:14px;
+      border-radius:6px;
+    ">
+    🗑️
+  </button>
 </td>
         </tr>
       `).join('');
