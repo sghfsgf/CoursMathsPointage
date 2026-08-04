@@ -7,195 +7,241 @@
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
   <meta name="theme-color" content="#fb923c">
-  <style>
-    :root {
-      --primary: #fb923c;          /* Orange clair */
-      --primary-dark: #f97316;     /* Orange plus foncé (actif) */
-      --primary-light: #fdba74;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #1e293b;
-      --border: #e2e8f0;
-      --muted: #64748b;
-    }
-    [data-theme="dark"] {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --text: #f1f5f9;
-      --border: #334155;
-      --muted: #94a3b8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-      padding-bottom: 40px;
-    }
-    .container { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+ <style>
+  :root {
+    --primary: #fb923c;
+    --primary-dark: #f97316;
+    --primary-light: #fdba74;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --border: #e2e8f0;
+    --muted: #64748b;
+  }
+  [data-theme="dark"] {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f1f5f9;
+    --border: #334155;
+    --muted: #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding-bottom: 40px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .container { max-width: 980px; margin: 0 auto; padding: 0 12px; }
 
-    /* ===== MENU PRINCIPAL ORANGE ===== */
-    .main-nav {
-      background: linear-gradient(135deg, #fb923c, #fdba74);
-      box-shadow: 0 4px 12px rgba(251, 146, 60, 0.25);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      margin-bottom: 24px;
-    }
+  /* ===== MENU PRINCIPAL ===== */
+  .main-nav {
+    background: linear-gradient(135deg, #fb923c, #fdba74);
+    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 16px;
+  }
+  .nav-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .nav-brand {
+    color: white;
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center;
+  }
+  .nav-link {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 9px 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .nav-link:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  .nav-link.active {
+    background: white;
+    color: #c2410c;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .theme-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 8px 11px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.15rem;
+  }
+
+  /* ===== CONTENU ===== */
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  h2 { font-size: 1.1rem; margin-bottom: 14px; }
+  .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    align-items: center;
+  }
+  input, select, button {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 16px;          /* important pour éviter le zoom sur mobile */
+    background: var(--card);
+    color: var(--text);
+  }
+  input, select { flex: 1; min-width: 140px; }
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  button:hover { opacity: 0.92; }
+  button.success { background: var(--success); }
+  button.danger { background: var(--danger); }
+  button.secondary { background: #64748b; }
+  button.outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  th, td { padding: 11px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; color: var(--muted); font-size: 0.82rem; }
+  .present { color: var(--success); font-weight: 600; }
+  .absent { color: var(--danger); font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-size: 0.76rem;
+    background: #ffedd5;
+    color: #9a3412;
+  }
+  [data-theme="dark"] .badge { background: #7c2d12; color: #fed7aa; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .empty { color: var(--muted); font-style: italic; padding: 20px 0; text-align: center; }
+  .compteur {
+    display: flex;
+    gap: 12px;
+    margin: 12px 0;
+    font-weight: 600;
+    flex-wrap: wrap;
+  }
+  .compteur span { padding: 6px 12px; border-radius: 8px; }
+  .compteur .p { background: #dcfce7; color: #166534; }
+  .compteur .a { background: #fee2e2; color: #991b1b; }
+  [data-theme="dark"] .compteur .p { background: #14532d; color: #bbf7d0; }
+  [data-theme="dark"] .compteur .a { background: #7f1d1d; color: #fecaca; }
+
+  /* ===== VERSION MOBILE (Huawei Y5p et petits écrans) ===== */
+  @media (max-width: 600px) {
     .nav-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      flex-wrap: wrap;
+      padding: 8px 10px;
       gap: 8px;
     }
     .nav-brand {
-      color: white;
-      font-weight: 700;
-      font-size: 1.15rem;
-      padding: 14px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 1rem;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 2px;
     }
     .nav-links {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
+      width: 100%;
+      justify-content: space-between;
+      gap: 2px;
     }
     .nav-link {
-      background: transparent;
-      border: none;
-      color: white;
-      padding: 12px 18px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      border-radius: 10px;
-      transition: all 0.2s ease;
-    }
-    .nav-link:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    .nav-link.active {
-      background: white;
-      color: #c2410c;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex: 1;
+      text-align: center;
+      padding: 10px 4px;
+      font-size: 0.82rem;
     }
     .theme-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1.1rem;
+      position: absolute;
+      right: 10px;
+      top: 10px;
     }
-    .theme-btn:hover { background: rgba(255,255,255,0.3); }
-
-    /* ===== RESTE DU SITE ===== */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
+    .main-nav {
+      position: relative;
     }
-    h1 { font-size: 1.5rem; }
-    .subtitle { color: var(--muted); font-size: 0.9rem; }
     .card {
-      background: var(--card);
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      padding: 14px 12px;
+      border-radius: 12px;
     }
-    h2 { font-size: 1.1rem; margin-bottom: 14px; }
+    table {
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 10px 6px;
+    }
     .row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-      align-items: center;
+      gap: 8px;
     }
-    input, select, button {
-      padding: 11px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      font-size: 0.95rem;
-      background: var(--card);
-      color: var(--text);
-    }
-    input, select { flex: 1; min-width: 140px; }
     button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      white-space: nowrap;
+      padding: 12px 14px;
     }
-    button:hover { opacity: 0.92; }
-    button.success { background: var(--success); }
-    button.danger { background: var(--danger); }
-    button.secondary { background: #64748b; }
-    button.outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-    th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--border); }
-    th { font-weight: 600; color: var(--muted); font-size: 0.85rem; }
-    .present { color: var(--success); font-weight: 600; }
-    .absent { color: var(--danger); font-weight: 600; }
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      background: #ffedd5;
-      color: #9a3412;
-    }
-    [data-theme="dark"] .badge { background: #7c2d12; color: #fed7aa; }
-    .section { display: none; }
-    .section.active { display: block; }
-    .empty { color: var(--muted); font-style: italic; padding: 20px 0; text-align: center; }
-    .compteur {
-      display: flex;
-      gap: 16px;
-      margin: 12px 0;
-      font-weight: 600;
-    }
-    .compteur span { padding: 6px 12px; border-radius: 8px; }
-    .compteur .p { background: #dcfce7; color: #166534; }
-    .compteur .a { background: #fee2e2; color: #991b1b; }
-    [data-theme="dark"] .compteur .p { background: #14532d; color: #bbf7d0; }
-    [data-theme="dark"] .compteur .a { background: #7f1d1d; color: #fecaca; }
-    .search-box { margin-bottom: 12px; }
+  }
 
-    @media (max-width: 600px) {
-      .nav-link { padding: 10px 12px; font-size: 0.88rem; }
-      body { padding: 0; }
-      .container { padding: 0 12px; }
-      input, select, button { font-size: 16px; }
-      th, td { padding: 10px 6px; font-size: 0.9rem; }
+  /* Très petit écran (Y5p en mode portrait) */
+  @media (max-width: 380px) {
+    .nav-link {
+      font-size: 0.78rem;
+      padding: 9px 2px;
     }
-    @media print {
-      .main-nav, .no-print { display: none !important; }
-      body { background: white; color: black; }
-      .card { box-shadow: none; border: 1px solid #ccc; }
+    .nav-brand {
+      font-size: 0.95rem;
     }
-  </style>
+  }
+
+  @media print {
+    .main-nav, .no-print { display: none !important; }
+    body { background: white; color: black; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
