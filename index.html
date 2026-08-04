@@ -338,14 +338,20 @@
     </div>
 
     <!-- STATISTIQUES -->
-    <div id="stats" class="section">
-      <div class="card">
-        <h2>Statistiques par élève</h2>
-        <div id="contenuStats"></div>
-      </div>
-    </div>
-  </div>
+    <!-- STATISTIQUES -->
+<div id="stats" class="section">
+  <div class="card">
+    <h2>Statistiques par élève</h2>
 
+    <button onclick="exporterExcel()">
+       Export Excel
+    </button>
+
+    <div id="contenuStats"></div>
+  </div>
+</div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import { getFirestore, collection, doc, setDoc, updateDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
@@ -679,6 +685,25 @@ window.modifierEleve = async function(id) {
         </table>
       `;
     };
+    window.exporterExcel = function() {
+
+  const table = document.querySelector("#contenuStats table");
+
+  if (!table) {
+    alert("Aucune statistique disponible");
+    return;
+  }
+
+  const classeur = XLSX.utils.table_to_book(
+    table,
+    { sheet: "Statistiques" }
+  );
+
+  XLSX.writeFile(
+    classeur,
+    "Statistiques_Pointage_Maths.xlsx"
+  );
+};
   </script>
 </body>
 </html>
