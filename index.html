@@ -348,7 +348,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  import { getFirestore, collection, doc, setDoc, updateDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
     // ===== TA CONFIGURATION FIREBASE =====
     const firebaseConfig = {
@@ -438,7 +438,25 @@
       document.getElementById('contactEleve').value = '';
       document.getElementById('parentEleve').value = '';
     };
+window.modifierEleve = async function(id) {
 
+  const eleve = eleves.find(e => e.id === id);
+
+  if (!eleve) return;
+
+  const nouveauContact = prompt(
+    "Modifier le contact de " + eleve.nom,
+    eleve.contact || ""
+  );
+
+  if (nouveauContact === null) return;
+
+  await updateDoc(doc(db, "eleves", id), {
+    contact: nouveauContact
+  });
+
+  alert("Contact modifié avec succès !");
+};
     window.supprimerEleve = async function(id) {
       if (!confirm('Supprimer cet élève ?')) return;
       await deleteDoc(doc(db, "eleves", id));
@@ -469,7 +487,10 @@
     : "—"}
 </td>
           <td>${e.parent || "—"}</td>
-          <td><button class="danger" onclick="supprimerEleve('${e.id}')">Supprimer</button></td>
+         <td>
+  <button onclick="modifierEleve('${e.id}')">✏️ Modifier</button>
+  <button class="danger" onclick="supprimerEleve('${e.id}')">🗑️ Supprimer</button>
+</td>
         </tr>
       `).join('');
     };
