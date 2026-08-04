@@ -7,265 +7,221 @@
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
   <meta name="theme-color" content="#fb923c">
- <style>
-  :root {
-    --primary: #fb923c;
-    --primary-dark: #f97316;
-    --primary-light: #fdba74;
-    --success: #16a34a;
-    --danger: #dc2626;
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --text: #1e293b;
-    --border: #e2e8f0;
-    --muted: #64748b;
-  }
-  [data-theme="dark"] {
-    --bg: #0f172a;
-    --card: #1e293b;
-    --text: #f1f5f9;
-    --border: #334155;
-    --muted: #94a3b8;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
-    padding-bottom: 40px;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .container { max-width: 980px; margin: 0 auto; padding: 0 12px; }
+  <style>
+    :root {
+      --primary: #fb923c;
+      --primary-dark: #f97316;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --border: #e2e8f0;
+      --muted: #64748b;
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f1f5f9;
+      --border: #334155;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 40px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .container { max-width: 980px; margin: 0 auto; padding: 0 12px; }
 
-  /* ===== MENU PRINCIPAL ===== */
-  .main-nav {
-    background: linear-gradient(135deg, #fb923c, #fdba74);
-    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.25);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    margin-bottom: 16px;
-  }
-  .nav-inner {
-    max-width: 980px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .nav-brand {
-    color: white;
-    font-weight: 700;
-    font-size: 1.05rem;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    white-space: nowrap;
-  }
-  .nav-links {
-    display: flex;
-    gap: 3px;
-    flex-wrap: wrap;
-    flex: 1;
-    justify-content: center;
-  }
-  .nav-link {
-    background: transparent;
-    border: none;
-    color: white;
-    padding: 9px 12px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-  .nav-link:hover {
-    background: rgba(255,255,255,0.2);
-  }
-  .nav-link.active {
-    background: white;
-    color: #c2410c;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-  }
-  .theme-btn {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: white;
-    padding: 8px 11px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.15rem;
-  }
-
-  /* ===== CONTENU ===== */
-  .card {
-    background: var(--card);
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 14px;
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-  h2 { font-size: 1.1rem; margin-bottom: 14px; }
-  .row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-    align-items: center;
-  }
-  input, select, button {
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    font-size: 16px;          /* important pour éviter le zoom sur mobile */
-    background: var(--card);
-    color: var(--text);
-  }
-  input, select { flex: 1; min-width: 140px; }
-  button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  button:hover { opacity: 0.92; }
-  button.success { background: var(--success); }
-  button.danger { background: var(--danger); }
-  button.secondary { background: #64748b; }
-  button.outline {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-  }
-  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-  th, td { padding: 11px 8px; text-align: left; border-bottom: 1px solid var(--border); }
-  th { font-weight: 600; color: var(--muted); font-size: 0.82rem; }
-  .present { color: var(--success); font-weight: 600; }
-  .absent { color: var(--danger); font-weight: 600; }
-  .badge {
-    display: inline-block;
-    padding: 4px 9px;
-    border-radius: 20px;
-    font-size: 0.76rem;
-    background: #ffedd5;
-    color: #9a3412;
-  }
-  [data-theme="dark"] .badge { background: #7c2d12; color: #fed7aa; }
-  .section { display: none; }
-  .section.active { display: block; }
-  .empty { color: var(--muted); font-style: italic; padding: 20px 0; text-align: center; }
-  .compteur {
-    display: flex;
-    gap: 12px;
-    margin: 12px 0;
-    font-weight: 600;
-    flex-wrap: wrap;
-  }
-  .compteur span { padding: 6px 12px; border-radius: 8px; }
-  .compteur .p { background: #dcfce7; color: #166534; }
-  .compteur .a { background: #fee2e2; color: #991b1b; }
-  [data-theme="dark"] .compteur .p { background: #14532d; color: #bbf7d0; }
-  [data-theme="dark"] .compteur .a { background: #7f1d1d; color: #fecaca; }
-
-  /* ===== VERSION MOBILE (Huawei Y5p et petits écrans) ===== */
-  @media (max-width: 600px) {
+    .main-nav {
+      background: linear-gradient(135deg, #fb923c, #fdba74);
+      box-shadow: 0 4px 12px rgba(251, 146, 60, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin-bottom: 16px;
+    }
     .nav-inner {
-      padding: 8px 10px;
-      gap: 8px;
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
     .nav-brand {
-      font-size: 1rem;
-      width: 100%;
-      justify-content: center;
-      margin-bottom: 2px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
     }
     .nav-links {
-      width: 100%;
-      justify-content: space-between;
-      gap: 2px;
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+      flex: 1;
+      justify-content: center;
     }
     .nav-link {
-      flex: 1;
-      text-align: center;
-      padding: 10px 4px;
-      font-size: 0.82rem;
+      background: transparent;
+      border: none;
+      color: white;
+      padding: 9px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover { background: rgba(255,255,255,0.2); }
+    .nav-link.active {
+      background: white;
+      color: #c2410c;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
     .theme-btn {
-      position: absolute;
-      right: 10px;
-      top: 10px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 8px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.15rem;
     }
-    .main-nav {
-      position: relative;
-    }
+
     .card {
-      padding: 14px 12px;
-      border-radius: 12px;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
-    table {
-      font-size: 0.88rem;
-    }
-    th, td {
-      padding: 10px 6px;
-    }
+    h2 { font-size: 1.1rem; margin-bottom: 14px; }
     .row {
-      gap: 8px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: center;
     }
-    button {
+    input, select, button {
       padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 16px;
+      background: var(--card);
+      color: var(--text);
     }
-  }
+    input, select { flex: 1; min-width: 140px; }
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    button:hover { opacity: 0.92; }
+    button.success { background: var(--success); }
+    button.danger { background: var(--danger); }
+    button.secondary { background: #64748b; }
+    button.outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { padding: 11px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { font-weight: 600; color: var(--muted); font-size: 0.82rem; }
+    .present { color: var(--success); font-weight: 600; }
+    .absent { color: var(--danger); font-weight: 600; }
+    .badge {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      background: #ffedd5;
+      color: #9a3412;
+    }
+    [data-theme="dark"] .badge { background: #7c2d12; color: #fed7aa; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .empty { color: var(--muted); font-style: italic; padding: 20px 0; text-align: center; }
+    .compteur {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0;
+      font-weight: 600;
+      flex-wrap: wrap;
+    }
+    .compteur span { padding: 6px 12px; border-radius: 8px; }
+    .compteur .p { background: #dcfce7; color: #166534; }
+    .compteur .a { background: #fee2e2; color: #991b1b; }
+    [data-theme="dark"] .compteur .p { background: #14532d; color: #bbf7d0; }
+    [data-theme="dark"] .compteur .a { background: #7f1d1d; color: #fecaca; }
+    .status {
+      text-align: center;
+      padding: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
 
-  /* Très petit écran (Y5p en mode portrait) */
-  @media (max-width: 380px) {
-    .nav-link {
-      font-size: 0.78rem;
-      padding: 9px 2px;
+    @media (max-width: 600px) {
+      .nav-inner { padding: 8px 10px; gap: 8px; }
+      .nav-brand { font-size: 1rem; width: 100%; justify-content: center; margin-bottom: 2px; }
+      .nav-links { width: 100%; justify-content: space-between; gap: 2px; }
+      .nav-link { flex: 1; text-align: center; padding: 10px 4px; font-size: 0.82rem; }
+      .theme-btn { position: absolute; right: 10px; top: 10px; }
+      .main-nav { position: relative; }
+      .card { padding: 14px 12px; border-radius: 12px; }
+      table { font-size: 0.85rem; }
+      th, td { padding: 10px 5px; }
     }
-    .nav-brand {
-      font-size: 0.95rem;
+    @media (max-width: 380px) {
+      .nav-link { font-size: 0.78rem; padding: 9px 2px; }
+      .nav-brand { font-size: 0.95rem; }
     }
-  }
-
-  @media print {
-    .main-nav, .no-print { display: none !important; }
-    body { background: white; color: black; }
-    .card { box-shadow: none; border: 1px solid #ccc; }
-  }
-</style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    @media print {
+      .main-nav, .no-print { display: none !important; }
+      body { background: white; color: black; }
+      .card { box-shadow: none; border: 1px solid #ccc; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- MENU PRINCIPAL ORANGE -->
   <nav class="main-nav no-print">
-    <div class="nav-inner"><div class="nav-brand">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 20h9"></path>
-    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-  </svg>
-  Pointage Maths
-</div>
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        Pointage Maths
+      </div>
       <div class="nav-links">
         <button class="nav-link active" onclick="showSection('eleves')">Élèves</button>
         <button class="nav-link" onclick="showSection('pointage')">Pointage</button>
         <button class="nav-link" onclick="showSection('historique')">Historique</button>
         <button class="nav-link" onclick="showSection('stats')">Statistiques</button>
       </div>
-      <button class="theme-btn" onclick="toggleTheme()" title="Changer de thème">🌓</button>
+      <button class="theme-btn" onclick="toggleTheme()">🌓</button>
     </div>
   </nav>
 
   <div class="container">
+    <div id="status" class="status">Chargement des données...</div>
 
     <!-- ÉLÈVES -->
     <div id="eleves" class="section active">
@@ -283,13 +239,17 @@
             <option value="3ème">Secondaire - 3ème</option>
             <option value="Terminale">Secondaire - Terminale</option>
           </select>
+        </div>
+        <div class="row">
+          <input type="text" id="contactEleve" placeholder="Contact (téléphone)">
+          <input type="text" id="parentEleve" placeholder="Parent Responsable">
           <button onclick="ajouterEleve()">Ajouter</button>
         </div>
       </div>
 
       <div class="card">
         <h2>Liste des élèves</h2>
-        <div class="row search-box">
+        <div class="row">
           <input type="text" id="rechercheEleve" placeholder="Rechercher un élève..." oninput="afficherEleves()">
           <select id="filtreNiveau" onchange="afficherEleves()">
             <option value="">Tous les niveaux</option>
@@ -305,7 +265,13 @@
         </div>
         <table>
           <thead>
-            <tr><th>Nom</th><th>Niveau</th><th>Actions</th></tr>
+            <tr>
+              <th>Nom</th>
+              <th>Niveau</th>
+              <th>Contact</th>
+              <th>Parent Responsable</th>
+              <th>Actions</th>
+            </tr>
           </thead>
           <tbody id="listeEleves"></tbody>
         </table>
@@ -335,19 +301,14 @@
             <option value="Terminale">Secondaire - Terminale</option>
           </select>
         </div>
-
         <div class="compteur" id="compteurPointage" style="display:none">
           <span class="p">Présents : <span id="nbPresent">0</span></span>
           <span class="a">Absents : <span id="nbAbsent">0</span></span>
         </div>
-
         <table>
-          <thead>
-            <tr><th>Élève</th><th>Niveau</th><th>Présence</th></tr>
-          </thead>
+          <thead><tr><th>Élève</th><th>Niveau</th><th>Présence</th></tr></thead>
           <tbody id="listePointage"></tbody>
         </table>
-
         <div class="row" style="margin-top:16px">
           <button class="success" onclick="sauvegarderPointage()">Enregistrer la séance</button>
         </div>
@@ -370,11 +331,7 @@
             <option value="3ème">Secondaire - 3ème</option>
             <option value="Terminale">Secondaire - Terminale</option>
           </select>
-          <button class="secondary" onclick="exportJSON()">Exporter données</button>
-          <button class="success" onclick="exportExcel()">📊 Export Excel</button>
-          <button class="outline" onclick="document.getElementById('importFile').click()">Importer</button>
           <button class="danger" onclick="supprimerHistorique()">🗑️ Supprimer historique</button>
-          <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
         </div>
         <div id="contenuHistorique"></div>
       </div>
@@ -389,29 +346,43 @@
     </div>
   </div>
 
-  <script>
-    let eleves = JSON.parse(localStorage.getItem('eleves') || '[]');
-    let pointages = JSON.parse(localStorage.getItem('pointages') || '[]');
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+    // ===== TA CONFIGURATION FIREBASE =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxNCerMsn3FU_A9V5ayBgli8PfV0AQcsU",
+      authDomain: "pointagemaths.firebaseapp.com",
+      projectId: "pointagemaths",
+      storageBucket: "pointagemaths.firebasestorage.app",
+      messagingSenderId: "338864367303",
+      appId: "1:338864367303:web:22ded06dfd5fc4a93c80e2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let eleves = [];
+    let pointages = [];
+
+    // Thème
     if (localStorage.getItem('theme') === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
-
-    function toggleTheme() {
+    window.toggleTheme = function() {
       const html = document.documentElement;
       const isDark = html.getAttribute('data-theme') === 'dark';
       html.setAttribute('data-theme', isDark ? 'light' : 'dark');
       localStorage.setItem('theme', isDark ? 'light' : 'dark');
-    }
+    };
 
     document.getElementById('datePointage').valueAsDate = new Date();
 
-    function showSection(id) {
+    window.showSection = function(id) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(t => t.classList.remove('active'));
-      
       document.getElementById(id).classList.add('active');
-      
       const links = document.querySelectorAll('.nav-link');
       if (id === 'eleves') links[0].classList.add('active');
       if (id === 'pointage') links[1].classList.add('active');
@@ -422,32 +393,58 @@
       if (id === 'pointage') chargerElevesPointage();
       if (id === 'historique') afficherHistorique();
       if (id === 'stats') afficherStats();
-    }
+    };
 
-    function sauvegarder() {
-      localStorage.setItem('eleves', JSON.stringify(eleves));
-      localStorage.setItem('pointages', JSON.stringify(pointages));
-    }
+    // ===== ÉCOUTE EN TEMPS RÉEL =====
+    onSnapshot(collection(db, "eleves"), (snapshot) => {
+      eleves = [];
+      snapshot.forEach(docSnap => {
+        eleves.push({ id: docSnap.id, ...docSnap.data() });
+      });
+      eleves.sort((a, b) => a.nom.localeCompare(b.nom));
+      document.getElementById('status').textContent = "Connecté à Firebase ✓";
+      afficherEleves();
+      if (document.getElementById('pointage').classList.contains('active')) chargerElevesPointage();
+      if (document.getElementById('stats').classList.contains('active')) afficherStats();
+    });
+
+    onSnapshot(collection(db, "pointages"), (snapshot) => {
+      pointages = [];
+      snapshot.forEach(docSnap => {
+        pointages.push({ id: docSnap.id, ...docSnap.data() });
+      });
+      if (document.getElementById('historique').classList.contains('active')) afficherHistorique();
+      if (document.getElementById('stats').classList.contains('active')) afficherStats();
+    });
 
     // ===== ÉLÈVES =====
-    function ajouterEleve() {
+    window.ajouterEleve = async function() {
       const nom = document.getElementById('nomEleve').value.trim();
       const niveau = document.getElementById('niveauEleve').value;
+      const contact = document.getElementById('contactEleve').value.trim();
+      const parent = document.getElementById('parentEleve').value.trim();
+
       if (!nom) return alert('Entre un nom');
-      eleves.push({ id: Date.now(), nom, niveau });
+
+      const id = Date.now().toString();
+      await setDoc(doc(db, "eleves", id), {
+        nom,
+        niveau,
+        contact: contact || "",
+        parent: parent || ""
+      });
+
       document.getElementById('nomEleve').value = '';
-      sauvegarder();
-      afficherEleves();
-    }
+      document.getElementById('contactEleve').value = '';
+      document.getElementById('parentEleve').value = '';
+    };
 
-    function supprimerEleve(id) {
+    window.supprimerEleve = async function(id) {
       if (!confirm('Supprimer cet élève ?')) return;
-      eleves = eleves.filter(e => e.id !== id);
-      sauvegarder();
-      afficherEleves();
-    }
+      await deleteDoc(doc(db, "eleves", id));
+    };
 
-    function afficherEleves() {
+    window.afficherEleves = function() {
       const filtre = document.getElementById('filtreNiveau').value;
       const recherche = document.getElementById('rechercheEleve').value.toLowerCase();
       const tbody = document.getElementById('listeEleves');
@@ -457,22 +454,22 @@
       if (recherche) liste = liste.filter(e => e.nom.toLowerCase().includes(recherche));
 
       if (liste.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="empty">Aucun élève trouvé</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="empty">Aucun élève trouvé</td></tr>';
         return;
       }
       tbody.innerHTML = liste.map(e => `
         <tr>
           <td>${e.nom}</td>
           <td><span class="badge">${e.niveau}</span></td>
-          <td>
-            <button class="danger" onclick="supprimerEleve(${e.id})">Supprimer</button>
-          </td>
+          <td>${e.contact || "—"}</td>
+          <td>${e.parent || "—"}</td>
+          <td><button class="danger" onclick="supprimerEleve('${e.id}')">Supprimer</button></td>
         </tr>
       `).join('');
-    }
+    };
 
     // ===== POINTAGE =====
-    function chargerElevesPointage() {
+    window.chargerElevesPointage = function() {
       const filtre = document.getElementById('niveauPointage').value;
       const tbody = document.getElementById('listePointage');
       const liste = filtre ? eleves.filter(e => e.niveau === filtre) : eleves;
@@ -497,9 +494,9 @@
         </tr>
       `).join('');
       majCompteur();
-    }
+    };
 
-    function majCompteur() {
+    window.majCompteur = function() {
       let present = 0, absent = 0;
       document.querySelectorAll('#listePointage select').forEach(s => {
         if (s.value === 'Présent') present++;
@@ -507,9 +504,9 @@
       });
       document.getElementById('nbPresent').textContent = present;
       document.getElementById('nbAbsent').textContent = absent;
-    }
+    };
 
-    function sauvegarderPointage() {
+    window.sauvegarderPointage = async function() {
       const date = document.getElementById('datePointage').value;
       const seance = document.getElementById('seancePointage').value;
       if (!date) return alert('Choisis une date');
@@ -518,27 +515,27 @@
       const liste = filtre ? eleves.filter(e => e.niveau === filtre) : eleves;
       if (liste.length === 0) return alert('Aucun élève');
 
-      pointages = pointages.filter(p => !(p.date === date && p.seance === seance && (filtre === '' || p.niveau === filtre)));
+      // Supprimer les anciens pointages de cette séance
+      const anciens = pointages.filter(p => p.date === date && p.seance === seance && (filtre === '' || p.niveau === filtre));
+      const batch = writeBatch(db);
+      anciens.forEach(p => batch.delete(doc(db, "pointages", p.id)));
 
+      // Ajouter les nouveaux
       liste.forEach(e => {
         const statut = document.getElementById(`pres-${e.id}`).value;
-        pointages.push({
-          date,
-          seance,
-          eleveId: e.id,
-          nom: e.nom,
-          niveau: e.niveau,
-          statut
+        const id = Date.now().toString() + Math.random().toString(36).substr(2, 5);
+        batch.set(doc(db, "pointages", id), {
+          date, seance, eleveId: e.id, nom: e.nom, niveau: e.niveau, statut
         });
       });
 
-      sauvegarder();
+      await batch.commit();
       alert('Séance enregistrée !');
       showSection('historique');
-    }
+    };
 
     // ===== HISTORIQUE =====
-    function afficherHistorique() {
+    window.afficherHistorique = function() {
       const filtre = document.getElementById('filtreHisto').value;
       const cont = document.getElementById('contenuHistorique');
       let data = [...pointages];
@@ -574,9 +571,7 @@
               </div>
             </div>
             <table>
-              <thead>
-                <tr><th>Élève</th><th>Niveau</th><th>Statut</th></tr>
-              </thead>
+              <thead><tr><th>Élève</th><th>Niveau</th><th>Statut</th></tr></thead>
               <tbody>
                 ${liste.map(p => `
                   <tr>
@@ -590,21 +585,17 @@
           </div>
         `;
       }).join('');
-    }
+    };
 
-    function supprimerHistorique() {
-      if (pointages.length === 0) {
-        alert("Aucun historique à supprimer");
-        return;
-      }
-      if (confirm("Voulez-vous supprimer tout l'historique des pointages ?")) {
-        pointages = [];
-        localStorage.removeItem('pointages');
-        alert("Historique supprimé avec succès !");
-        afficherHistorique();
-        afficherStats();
-      }
-    }
+    window.supprimerHistorique = async function() {
+      if (pointages.length === 0) return alert("Aucun historique à supprimer");
+      if (!confirm("Voulez-vous supprimer tout l'historique des pointages ?")) return;
+
+      const batch = writeBatch(db);
+      pointages.forEach(p => batch.delete(doc(db, "pointages", p.id)));
+      await batch.commit();
+      alert("Historique supprimé !");
+    };
 
     function formatDate(d) {
       const [y, m, day] = d.split('-');
@@ -612,7 +603,7 @@
     }
 
     // ===== STATISTIQUES =====
-    function afficherStats() {
+    window.afficherStats = function() {
       const cont = document.getElementById('contenuStats');
       if (eleves.length === 0) {
         cont.innerHTML = '<p class="empty">Aucun élève</p>';
@@ -625,6 +616,8 @@
             <tr>
               <th>Élève</th>
               <th>Niveau</th>
+              <th>Contact</th>
+              <th>Parent</th>
               <th>Présences</th>
               <th>Absences</th>
               <th>Taux</th>
@@ -641,6 +634,8 @@
                 <tr>
                   <td>${e.nom}</td>
                   <td><span class="badge">${e.niveau}</span></td>
+                  <td>${e.contact || "—"}</td>
+                  <td>${e.parent || "—"}</td>
                   <td class="present">${presents}</td>
                   <td class="absent">${absents}</td>
                   <td>${taux === '-' ? '-' : taux + '%'}</td>
@@ -650,64 +645,7 @@
           </tbody>
         </table>
       `;
-    }
-
-    // ===== IMPORT / EXPORT =====
-    function exportExcel() {
-      if (pointages.length === 0) {
-        alert("Aucun pointage à exporter");
-        return;
-      }
-      const donnees = pointages.map(p => ({
-        Date: p.date,
-        Seance: p.seance,
-        Eleve: p.nom,
-        Niveau: p.niveau,
-        Statut: p.statut
-      }));
-      const feuille = XLSX.utils.json_to_sheet(donnees);
-      const classeur = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(classeur, feuille, "Pointages");
-      XLSX.writeFile(classeur, "Pointage_Cours_Maths.xlsx");
-    }
-
-    function exportJSON() {
-      const data = { eleves, pointages };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'pointage-maths-backup.json';
-      a.click();
-    }
-
-    function importJSON(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        try {
-          const data = JSON.parse(e.target.result);
-          if (data.eleves && data.pointages) {
-            if (confirm('Remplacer toutes les données actuelles ?')) {
-              eleves = data.eleves;
-              pointages = data.pointages;
-              sauvegarder();
-              alert('Données importées avec succès');
-              afficherEleves();
-            }
-          } else {
-            alert('Fichier invalide');
-          }
-        } catch {
-          alert('Erreur de lecture du fichier');
-        }
-      };
-      reader.readAsText(file);
-    }
-
-    // Init
-    afficherEleves();
+    };
   </script>
 </body>
 </html>
