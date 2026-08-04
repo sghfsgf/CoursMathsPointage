@@ -461,7 +461,13 @@
         <tr>
           <td>${e.nom}</td>
           <td><span class="badge">${e.niveau}</span></td>
-          <td>${e.contact || "—"}</td>
+          <td>
+  ${e.contact 
+    ? `<a href="tel:${e.contact}" style="text-decoration:none;color:#2563eb;font-weight:600">
+        📞 ${e.contact}
+       </a>`
+    : "—"}
+</td>
           <td>${e.parent || "—"}</td>
           <td><button class="danger" onclick="supprimerEleve('${e.id}')">Supprimer</button></td>
         </tr>
@@ -634,7 +640,13 @@
                 <tr>
                   <td>${e.nom}</td>
                   <td><span class="badge">${e.niveau}</span></td>
-                  <td>${e.contact || "—"}</td>
+               <td>
+  ${e.contact 
+    ? `<a href="tel:${e.contact}" style="text-decoration:none;color:#2563eb;font-weight:600">
+        📞 ${e.contact}
+       </a>`
+    : "—"}
+</td>
                   <td>${e.parent || "—"}</td>
                   <td class="present">${presents}</td>
                   <td class="absent">${absents}</td>
